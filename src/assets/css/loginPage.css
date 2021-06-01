@@ -1,0 +1,64 @@
+.login-page {
+    background: #e6e6e8;
+    height: 100vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form-div {
+    height: calc(100vh - 30%);
+    width: calc(100vw - 30%);
+    display: flex;
+}
+
+.login-form-left-section {
+    width: 50%;
+    background: #287bf6;
+    border-radius: 25px 0px 0px 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-section {
+    color: white;
+}
+
+.login-form-right-section {
+    width: 50%;
+    background: white;
+    border-radius: 0px 25px 25px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sign-in-div {
+    height: 80%;
+    color: gray;
+    text-align: center;
+}
+
+.sign-in-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in-form button {
+    background: #287bf6;
+    color: white;
+    height: 2.5rem;
+    width: 12rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.sign-in-form button:first-child {
+    margin-top: 2rem;
+}

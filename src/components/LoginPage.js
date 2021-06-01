@@ -8,7 +8,7 @@ export default function LoginPage() {
     } 
 
     const handleClick = (e) => {
-        fetch("https://github.com/login/oauth/authorize?client_id=xxxxxxxxxxxxx",
+        fetch(`https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`,
         {
             method: "GET"
         }
@@ -32,16 +32,16 @@ export default function LoginPage() {
                 </div>
                 <div className="login-form-right-section">   
                     <div className="sign-in-div">
-                        <h1>Sign in</h1>
+                        <h1>Sign in with</h1>
                         <div className="sign-in-form">
                             <button onClick={(e) => handleClick(e)}>
-                                Login with <i class="icon-github"></i> GitHub
+                                <i className="fa fa-github icon" aria-hidden="true"></i> GitHub
                             </button>
                             <button>
-                                Login with GitLab
+                                <i className="fa fa-gitlab icon" aria-hidden="true"></i> GitLab
                             </button>
                             <button>
-                                Login with BitBucket
+                                <i className="fa fa-bitbucket icon" aria-hidden="true"></i> BitBucket
                             </button>
                         </div>
                     </div>

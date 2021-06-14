@@ -1,12 +1,21 @@
-import React from 'react';
-import LoginPage from './LoginPage';
-import Branches from './Branches';
+import React from "react";
+import LoginPage from "./LoginPage";
+import Repositories from "./Repositories";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-export default function AppContainer(){
-    return (
-        <div>
+export default function AppContainer() {
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route path="/repositories">
+            <Repositories />
+          </Route>
+          <Route path="/">
             <LoginPage />
-            {/* <Branches /> */}
-        </div>
-    )
+          </Route>
+        </Switch>
+      </div>
+    </Router>
+  );
 }

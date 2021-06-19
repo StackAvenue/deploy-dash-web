@@ -26,6 +26,13 @@
   /* margin-left: 22px; */
   margin-left: 53px;
 }
+.branch-div p {
+  font-size: 23px;
+  font-weight: 700;
+  margin-left: 53px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
 
 .parent-div {
   display: flex;
@@ -54,7 +61,20 @@ li:first-child {
   background: white;
   border-radius: 50%;
   /* margin-right: 22px; */
-  margin-right: 53px;
+  /* margin-right: 53px; */
+  margin-right: 8px;
+}
+
+.avatar img {
+  height: inherit;
+}
+
+.dropdown-arrow {
+  margin-right: 45px;
+}
+
+.dropdown-arrow .fa-caret-down {
+  cursor: pointer;
 }
 
 .repo-div {
@@ -147,4 +167,23 @@ td:hover {
 
 .user-name {
   margin-right: 10px;
+}
+
+.logout-dropdown {
+  height: 75px;
+  width: 100px;
+  background: #e6e6e6;
+  border-radius: 6px;
+  position: absolute;
+  right: 40px;
+  top: 69px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.logout-dropdown div:hover {
+  background: white;
+  cursor: pointer;
 }

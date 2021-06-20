@@ -14,7 +14,7 @@
   background: #377be0;
   color: white;
   width: 100%;
-  height: fit-content;
+  height: 68px;
   margin-top: 14px;
   text-align: center;
   display: flex;
@@ -25,6 +25,9 @@
 .branch-div h2 {
   /* margin-left: 22px; */
   margin-left: 53px;
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 700;
 }
 .branch-div p {
   font-size: 23px;
@@ -167,6 +170,9 @@ td:hover {
 
 .user-name {
   margin-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
 }
 
 .logout-dropdown {
@@ -186,4 +192,40 @@ td:hover {
 .logout-dropdown div:hover {
   background: white;
   cursor: pointer;
+}
+
+.spinner-border {
+  position: fixed;
+  bottom: 50%;
+  left: 49%;
+}
+
+.dropdown {
+  margin-right: 45px;
+}
+
+.dropdown button {
+  background: #387be0;
+  border: none;
+  padding: 0 !important;
+}
+
+.dropdown button:focus {
+  color: #fff;
+  background-color: #387be0 !important;
+  border-color: #387be0 !important;
+  box-shadow: none !important; 
+  box-shadow: none !important; 
+}
+
+.dropdown button:active {
+  color: #fff;
+  background-color: #387be0 !important;
+  border-color: #387be0 !important;
+  box-shadow: none !important; 
+  box-shadow: none !important; 
+}
+
+.dropdown-menu {
+  margin-top: 5px !important;
 }

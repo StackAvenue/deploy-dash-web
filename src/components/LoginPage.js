@@ -1,23 +1,23 @@
-import React from "react";
-import "../assets/css/loginPage.css";
+import React from 'react';
+import '../assets/scss/loginPage.scss';
 
 export default function LoginPage() {
   const newTab = (url) => {
-    window.open(url, "_blank");
+    window.open(url, '_blank');
   };
 
-  const handleClick = (e) => {
+  const handleClick = async () => {
     fetch(
       `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`,
       {
-        method: "GET",
-      }
+        method: 'GET',
+      },
     )
       .then((response) => {
-        console.log(response);
         newTab(response.url);
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.log(err);
       });
   };
@@ -34,14 +34,19 @@ export default function LoginPage() {
           <div className="sign-in-div">
             <h1>Sign in with</h1>
             <div className="sign-in-form">
-              <button onClick={(e) => handleClick(e)}>
-                <i className="fa fa-github icon" aria-hidden="true"></i> GitHub
+              <button type="button" onClick={(e) => handleClick(e)}>
+                <i className="fa fa-github icon" aria-hidden="true" />
+                {' '}
+                GitHub
               </button>
-              <button>
-                <i className="fa fa-gitlab icon" aria-hidden="true"></i> GitLab
+              <button type="button">
+                <i className="fa fa-gitlab icon" aria-hidden="true" />
+                {' '}
+                GitLab
               </button>
-              <button>
-                <i className="fa fa-bitbucket icon" aria-hidden="true"></i>{" "}
+              <button type="button">
+                <i className="fa fa-bitbucket icon" aria-hidden="true" />
+                {' '}
                 BitBucket
               </button>
             </div>

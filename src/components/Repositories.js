@@ -94,8 +94,6 @@ export default function Repositories() {
               id="dropdown-menu-align-right"
             >
               <Dropdown.Item eventKey="1">Re-sync</Dropdown.Item>
-              {/* <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-              {/* <Dropdown.Divider /> */}
               <Dropdown.Item eventKey="4" onClick={(e) => signOut(e)}>Sign out</Dropdown.Item>
             </DropdownButton>
           </div>

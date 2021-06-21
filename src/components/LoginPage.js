@@ -2,6 +2,8 @@ import React from "react";
 import "../assets/css/loginPage.css";
 
 export default function LoginPage() {
+
+
   const newTab = (url) => {
     window.open(url, "_blank");
   };
@@ -12,8 +14,7 @@ export default function LoginPage() {
       {
         method: "GET",
       }
-    )
-      .then((response) => {
+    ).then((response) => {
         console.log(response);
         newTab(response.url);
       })

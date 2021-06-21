@@ -1,8 +1,12 @@
-import { React, useEffect, useState } from "react";
+import React, {useEffect, useState } from "react";
 import "../assets/css/branchesPage.css";
+import {Link} from 'react-router-dom';
+import Branch from './Branch';
 
 export default function Repositories() {
-  const [repos, setRepos] = useState(null)
+  const [repos, setRepos] = useState(null);
+ 
+  
 
   useEffect(() => {
     // setTimeout(() => {
@@ -16,11 +20,13 @@ export default function Repositories() {
     setRepos(check)
     getInfo(check)
     },5000)
-  });
+   
+  },[]);
+
 
   const getInfo = (code) => {
     fetch(
-      `http://localhost:3001/api/v1/github_oauth/authorise_user?code=${code}`,
+      `http://3ed64a59313e.ngrok.io/api/v1/github_oauth/authorise_user?code=${code}`,
       {
         method: "GET",
         // mode: 'no-cors'
@@ -37,7 +43,7 @@ export default function Repositories() {
   const getParameterByName = (name, url) => {
     console.log(url)
     if (!url) {
-    url = "http://localhost:3000/login/oauth/authorize?code=22420353c9c197911558";
+    url = "http://3ed64a59313e.ngrok.io/login/oauth/authorize?code=22420353c9c197911558/";
     }
     name = name.replace(/[\[\]]/g, "\\$&");
     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
@@ -46,6 +52,26 @@ export default function Repositories() {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
    }
+
+ 
+
+   var arryval = [
+     {name: 'Repo 1', id: "1",
+      branch:["branch 1", "branch 2", "branch 3"]},
+     {name: 'Repo 2', id: "2",
+     branch:["branch 1", "branch 2", "branch 3", "branch 4"]},
+     {name: 'Repo 3', id: "3",
+     branch:["branch 1", "branch 2", "branch 3", "branch 4", "branch 5"]},
+     {name: 'Repo 4', id: "4",
+     branch:["branch 1", "branch 2"]}
+    ];
+
+
+
+
+
+
+   
 
   return (
     <div className="homepage">
@@ -69,23 +95,20 @@ export default function Repositories() {
                   <th>Repositories</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>Repo 1</td>
-                </tr>
-                <tr>
-                  <td>Repo 2</td>
-                </tr>
-                <tr>
-                  <td>Repo 3</td>
-                </tr>
-                <tr>
-                  <td>Repo 4</td>
-                </tr>
-                <tr>
-                  <td>Repo 5</td>
-                </tr>
-              </tbody>
+
+               
+                    <tbody>
+                    {arryval.map(branchName => (
+                    <tr>
+                      <Link to={"/repositories/branch"}><td>{branchName.name}</td></Link> 
+                    </tr>
+                    ))}
+                    
+               
+                   </tbody>
+                
+              
+                
             </table>
           </div>
         </div>}
@@ -93,3 +116,4 @@ export default function Repositories() {
     </div>
   );
 }
+

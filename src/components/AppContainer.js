@@ -1,7 +1,7 @@
-import React from "react";
-import LoginPage from "./LoginPage";
-import Repositories from "./Repositories";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import LoginPage from './LoginPage';
+import Repositories from './Repositories';
 import Branch from './Branch';
 
 export default function AppContainer() {
@@ -12,7 +12,7 @@ export default function AppContainer() {
           <Route exact path="/repositories">
             <Repositories />
           </Route>
-          <Route path="/repositories/:branch">
+          <Route path="/repositories/:reponame/branch">
             <Branch />
           </Route>
           <Route exact path="/">

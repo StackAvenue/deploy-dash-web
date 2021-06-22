@@ -14,7 +14,7 @@
   background: #377be0;
   color: white;
   width: 100%;
-  height: fit-content;
+  height: 68px;
   margin-top: 14px;
   text-align: center;
   display: flex;
@@ -25,6 +25,16 @@
 .branch-div h2 {
   /* margin-left: 22px; */
   margin-left: 53px;
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+.branch-div p {
+  font-size: 23px;
+  font-weight: 700;
+  margin-left: 53px;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .parent-div {
@@ -54,7 +64,20 @@ li:first-child {
   background: white;
   border-radius: 50%;
   /* margin-right: 22px; */
-  margin-right: 53px;
+  /* margin-right: 53px; */
+  margin-right: 8px;
+}
+
+.avatar img {
+  height: inherit;
+}
+
+.dropdown-arrow {
+  margin-right: 45px;
+}
+
+.dropdown-arrow .fa-caret-down {
+  cursor: pointer;
 }
 
 .repo-div {
@@ -147,4 +170,62 @@ td:hover {
 
 .user-name {
   margin-right: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.logout-dropdown {
+  height: 75px;
+  width: 100px;
+  background: #e6e6e6;
+  border-radius: 6px;
+  position: absolute;
+  right: 40px;
+  top: 69px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.logout-dropdown div:hover {
+  background: white;
+  cursor: pointer;
+}
+
+.spinner-border {
+  position: fixed;
+  bottom: 50%;
+  left: 49%;
+}
+
+.dropdown {
+  margin-right: 45px;
+}
+
+.dropdown button {
+  background: #387be0;
+  border: none;
+  padding: 0 !important;
+}
+
+.dropdown button:focus {
+  color: #fff;
+  background-color: #387be0 !important;
+  border-color: #387be0 !important;
+  box-shadow: none !important; 
+  box-shadow: none !important; 
+}
+
+.dropdown button:active {
+  color: #fff;
+  background-color: #387be0 !important;
+  border-color: #387be0 !important;
+  box-shadow: none !important; 
+  box-shadow: none !important; 
+}
+
+.dropdown-menu {
+  margin-top: 5px !important;
 }

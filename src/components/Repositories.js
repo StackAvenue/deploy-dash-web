@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 import { React, useEffect, useState } from 'react';
@@ -36,26 +37,46 @@ export default function Repositories() {
       });
   };
 
-  const getInfo = (code) => {
+  // const getInfo = (code) => {
+  //   fetch(
+  //     `http://localhost:3001/api/v1/github_oauth/authorise_user?code=${code}`,
+  //     {
+  //       method: 'GET',
+  //     },
+  //   ).then((response) => response.json())
+  //     .then((jsondata) => {
+  //       setUserData(jsondata.user);
+  //       setUserName(jsondata.user.login);
+  //       fetchRepos(jsondata.user.url);
+  //       localStorage.setItem('AccessToken', jsondata.user.access_token);
+  //     });
+  // };
+  const getRepos = () => {
+    const myHeaders = new Headers();
+    // myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
     fetch(
-      `http://localhost:3001/api/v1/github_oauth/authorise_user?code=${code}`,
+      'http://localhost:3001/api/v1/users/repositories',
       {
         method: 'GET',
+        headers: myHeaders,
       },
     ).then((response) => response.json())
       .then((jsondata) => {
-        setUserData(jsondata.user);
-        setUserName(jsondata.user.login);
-        fetchRepos(jsondata.user.url);
-        localStorage.setItem('AccessToken', jsondata.user.access_token);
+        setRepos(jsondata);
+        // setUserData(jsondata.user);
+        // setUserName(jsondata.user.login);
+        // fetchRepos(jsondata.user.url);
+        // localStorage.setItem('AccessToken', jsondata.user.access_token);
       });
   };
 
   useEffect(() => {
-    if (localStorage.getItem('AccessToken') === null) {
-      const check = getParameterByName('code', window.location.href);
-      getInfo(check);
-    }
+    // if (localStorage.getItem('AccessToken') === null) {
+    //   const check = getParameterByName('code', window.location.href);
+    //   getInfo(check);
+    // }
+    getRepos();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -13,75 +13,46 @@ export default function Repositories() {
   const [showAllRepos, setShowAllRepos] = useState(true);
   const [searchedRepos, setSearchedRepos] = useState(null);
 
-  const getParameterByName = (name, url) => {
-    if (!url) {
-      url = 'http://localhost:3000/login/oauth/authorize?code=22420353c9c197911558';
-    }
-    name = name.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
-    const results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  };
-
-  const fetchRepos = (url) => {
-    fetch(
-      `${url}/repos`,
-      {
-        method: 'GET',
-      },
-    ).then((response) => response.json())
-      .then((jsondata) => {
-        setRepos(jsondata);
-      });
-  };
-
-  // const getInfo = (code) => {
-  //   fetch(
-  //     `http://localhost:3001/api/v1/github_oauth/authorise_user?code=${code}`,
-  //     {
-  //       method: 'GET',
-  //     },
-  //   ).then((response) => response.json())
-  //     .then((jsondata) => {
-  //       setUserData(jsondata.user);
-  //       setUserName(jsondata.user.login);
-  //       fetchRepos(jsondata.user.url);
-  //       localStorage.setItem('AccessToken', jsondata.user.access_token);
-  //     });
-  // };
   const getRepos = () => {
     const myHeaders = new Headers();
-    // myHeaders.append('Content-Type', 'application/json');
     myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
     fetch(
-      'http://localhost:3001/api/v1/users/repositories',
+      `${process.env.REACT_APP_API_ENDPOINT}/users/repositories`,
       {
         method: 'GET',
         headers: myHeaders,
       },
     ).then((response) => response.json())
       .then((jsondata) => {
-        setRepos(jsondata);
-        // setUserData(jsondata.user);
-        // setUserName(jsondata.user.login);
-        // fetchRepos(jsondata.user.url);
-        // localStorage.setItem('AccessToken', jsondata.user.access_token);
+        setRepos(jsondata.repositories);
+      });
+  };
+
+  const getUserDetails = () => {
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
+    fetch(
+      `${process.env.REACT_APP_API_ENDPOINT}/users`,
+      {
+        method: 'GET',
+        headers: myHeaders,
+      },
+    ).then((response) => response.json())
+      .then((jsondata) => {
+        setUserName(jsondata.user.login);
+        setUserData(jsondata.user);
       });
   };
 
   useEffect(() => {
-    // if (localStorage.getItem('AccessToken') === null) {
-    //   const check = getParameterByName('code', window.location.href);
-    //   getInfo(check);
-    // }
     getRepos();
+    getUserDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signOut = () => {
     window.localStorage.removeItem('AccessToken');
+    localStorage.removeItem('UserAssets');
     window.close();
   };
 

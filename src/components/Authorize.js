@@ -23,19 +23,13 @@ export default function AppContainer(props) {
 
   const getInfo = (code) => {
     fetch(
-      `http://localhost:3001/api/v1/github_oauth/authorise_user?code=${code}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/github_oauth/authorise_user?code=${code}`,
       {
         method: 'GET',
       },
     ).then((response) => response.json())
       .then((jsondata) => {
-        // setUserData(jsondata.user);
-        // setUserName(jsondata.user.login);
-        // fetchRepos(jsondata.user.url);
-        // eslint-disable-next-line no-console
-        console.log('Props', props);
         localStorage.setItem('AccessToken', jsondata.user.access_token);
-        //   <Redirect from="/authorize" to="/repositories" />;
         navigateTo();
       });
   };

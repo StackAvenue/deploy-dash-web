@@ -5,6 +5,7 @@ import { React, useEffect, useState } from 'react';
 import '../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { useHistory } from 'react-router-dom';
 
 export default function Repositories() {
   const [repos, setRepos] = useState(null);
@@ -12,6 +13,8 @@ export default function Repositories() {
   const [userData, setUserData] = useState(null);
   const [showAllRepos, setShowAllRepos] = useState(true);
   const [searchedRepos, setSearchedRepos] = useState(null);
+  const history = useHistory();
+  const navigateTo = () => history.push('/');
 
   const getRepos = () => {
     const myHeaders = new Headers();
@@ -52,8 +55,7 @@ export default function Repositories() {
 
   const signOut = () => {
     window.localStorage.removeItem('AccessToken');
-    localStorage.removeItem('UserAssets');
-    window.close();
+    navigateTo();
   };
 
   const handleChange = (e) => {
@@ -68,6 +70,11 @@ export default function Repositories() {
     } else {
       setShowAllRepos(true);
     }
+  };
+
+  const resyncPage = () => {
+    // eslint-disable-next-line no-restricted-globals
+    window.location.reload();
   };
 
   return (
@@ -85,7 +92,7 @@ export default function Repositories() {
               title=""
               id="dropdown-menu-align-right"
             >
-              <Dropdown.Item eventKey="1">Re-sync</Dropdown.Item>
+              <Dropdown.Item eventKey="1" onClick={(e) => resyncPage(e)}>Re-sync</Dropdown.Item>
               <Dropdown.Item eventKey="4" onClick={(e) => signOut(e)}>Sign out</Dropdown.Item>
             </DropdownButton>
           </div>

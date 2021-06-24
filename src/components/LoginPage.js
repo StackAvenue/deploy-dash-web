@@ -3,7 +3,7 @@ import '../assets/scss/loginPage.scss';
 
 export default function LoginPage() {
   const newTab = (url) => {
-    window.open(url, '_blank');
+    window.open(url, '_parent');
   };
 
   const handleClick = async () => {

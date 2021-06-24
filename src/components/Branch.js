@@ -1,31 +1,38 @@
+/* eslint-disable no-lone-blocks */
+/* eslint-disable no-console */
+/* eslint-disable camelcase */
 /* eslint-disable react/jsx-key */
 /* eslint-disable jsx-quotes */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function Branch() {
-  const [branches, setBranches] = useState([]);
-  // const {id, branch} = useParams();
-
+  const [branch, setBranch] = useState([]);
+  console.log('branch', branch);
+  const x = useParams();
+  console.log('x', x);
   // const [repos, setRepos] = useState(null)
   const getBranch = () => {
-    fetch('http://localhost:3001/api/v1/users/branches?full_name=joshinehajoshi/Api-Integration-using-axios',
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
+    fetch(`http://localhost:3001/api/v1/users/branches?full_name=${x.userName}/${x.repoName}`,
       {
-        headers:
-        { access_token: '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' },
+        method: 'GET',
+        headers: myHeaders,
       }).then((resp) => {
       resp.json();
       // console.log('branch', resp);
     }).then((resp) => {
       // console.log('respbranch', resp);
-      setBranches(resp);
-      // console.log("nehajj",resp.type)
+      setBranch(resp);
+      console.log('nehajj', resp);
       // console.log()
     }).catch((err) => (err));
   };
   useEffect(() => {
     getBranch();
-  }, []);
+  });
 
   const arr = ['branch 1', 'branch 2', 'branch 3', 'branch 4'];
 
@@ -58,6 +65,11 @@ function Branch() {
                 <tr>
                   <th>Branch</th>
                 </tr>
+                {branch === undefined ? <tr>NO branch Present </tr> : branch.map((item) => (
+                  <tr>
+                    <th>{item}</th>
+                  </tr>
+                ))}
 
               </thead>
               <tbody />

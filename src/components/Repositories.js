@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 import { React, useEffect, useState } from 'react';
@@ -6,9 +6,12 @@ import '../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Branch from './Branch';
 
 export default function Repositories() {
   const [repos, setRepos] = useState([]);
+  // eslint-disable-next-line no-console
+  console.log('repo', repos);
   const [userName, setUserName] = useState('Loading');
   const [userData, setUserData] = useState(null);
   const [showAllRepos, setShowAllRepos] = useState(true);
@@ -28,56 +31,46 @@ export default function Repositories() {
   //   }).catch((err) => (err));
   // };
 
-  const getParameterByName = (name, url) => {
-    if (!url) {
-      url = 'http://localhost:3000/login/oauth/authorize?code=22420353c9c197911558';
-    }
-    name = name.replace(/[\[\]]/g, '\\$&');
-    const regex = new RegExp(`[?&]${name}(=([^&#]*)|&|#|$)`);
-    const results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  };
-
-  const fetchRepos = (url) => {
+  const getRepos = () => {
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
     fetch(
-      `${url}/repos`,
+      `${process.env.REACT_APP_API_ENDPOINT}/users/repositories`,
       {
         method: 'GET',
+        headers: myHeaders,
       },
     ).then((response) => response.json())
       .then((jsondata) => {
-        setRepos(jsondata);
+        setRepos(jsondata.repositories);
       });
   };
 
-  const getInfo = (code) => {
+  const getUserDetails = () => {
+    const myHeaders = new Headers();
+    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
     fetch(
-      `http://localhost:3001/api/v1/github_oauth/authorise_user?code=${code}`,
+      `${process.env.REACT_APP_API_ENDPOINT}/users`,
       {
         method: 'GET',
+        headers: myHeaders,
       },
     ).then((response) => response.json())
       .then((jsondata) => {
-        setUserData(jsondata.user);
         setUserName(jsondata.user.login);
-        fetchRepos(jsondata.user.url);
-        localStorage.setItem('AccessToken', jsondata.user.access_token);
+        setUserData(jsondata.user);
       });
   };
 
   useEffect(() => {
-    if (localStorage.getItem('AccessToken') === null) {
-      const check = getParameterByName('code', window.location.href);
-      getInfo(check);
-      // getRepo();
-    }
+    getRepos();
+    getUserDetails();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signOut = () => {
     window.localStorage.removeItem('AccessToken');
+    localStorage.removeItem('UserAssets');
     window.close();
   };
 
@@ -153,7 +146,7 @@ export default function Repositories() {
                 <tbody>
                   {repos && showAllRepos && repos.map((repo) => (
                     <tr key={repo.name}>
-                      <Link to={`/repositories/${repo.name}/branch`}><td>{repo.name}</td></Link>
+                      <Link to={`/repositories/${repo.full_name}/branch`}><td>{repo.name}</td></Link>
                     </tr>
                   ))}
                   {searchedRepos && !showAllRepos && searchedRepos.map((repo) => (

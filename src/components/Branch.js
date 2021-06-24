@@ -9,26 +9,19 @@ import { useParams } from 'react-router-dom';
 
 function Branch() {
   const [branch, setBranch] = useState([]);
-  console.log('branch', branch);
-  const x = useParams();
-  console.log('x', x);
-  // const [repos, setRepos] = useState(null)
+  const RepoName = useParams();
   const getBranch = () => {
     const myHeaders = new Headers();
     myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
-    fetch(`http://localhost:3001/api/v1/users/branches?full_name=${x.userName}/${x.repoName}`,
+    fetch(`http://localhost:3001/api/v1/users/branches?full_name=${RepoName.userName}/${RepoName.repoName}`,
       {
         method: 'GET',
         headers: myHeaders,
-      }).then((resp) => {
-      resp.json();
-      // console.log('branch', resp);
-    }).then((resp) => {
-      // console.log('respbranch', resp);
-      setBranch(resp);
-      console.log('nehajj', resp);
-      // console.log()
-    }).catch((err) => (err));
+      }).then((response) => response.json())
+      .then((jsondata) => {
+        console.log(jsondata);
+        setBranch(jsondata.branches);
+      });
   };
   useEffect(() => {
     getBranch();
@@ -57,20 +50,11 @@ function Branch() {
                 <tr>
                   <th>Branch</th>
                 </tr>
-                {arr.map((item) => (
+                {branch.map((items) => (
                   <tr>
-                    <th>{item}</th>
+                    <th>{items.name}</th>
                   </tr>
                 ))}
-                <tr>
-                  <th>Branch</th>
-                </tr>
-                {branch === undefined ? <tr>NO branch Present </tr> : branch.map((item) => (
-                  <tr>
-                    <th>{item}</th>
-                  </tr>
-                ))}
-
               </thead>
               <tbody />
             </table>

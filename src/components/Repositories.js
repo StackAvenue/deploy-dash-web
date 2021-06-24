@@ -88,29 +88,6 @@ export default function Repositories() {
     }
   };
 
-  // const arryval = [
-  //   {
-  //     name: 'Repo 1',
-  //     id: '1',
-  //     branch: ['branch 1', 'branch 2', 'branch 3'],
-  //   },
-  //   {
-  //     name: 'Repo 2',
-  //     id: '2',
-  //     branch: ['branch 1', 'branch 2', 'branch 3', 'branch 4'],
-  //   },
-  //   {
-  //     name: 'Repo 3',
-  //     id: '3',
-  //     branch: ['branch 1', 'branch 2', 'branch 3', 'branch 4', 'branch 5'],
-  //   },
-  //   {
-  //     name: 'Repo 4',
-  //     id: '4',
-  //     branch: ['branch 1', 'branch 2'],
-  //   },
-  // ];
-
   return (
     <div className="homepage">
       <div className="parent-div">

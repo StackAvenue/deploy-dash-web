@@ -4,6 +4,8 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AppContainer(props) {
   const history = useHistory();
@@ -31,6 +33,14 @@ export default function AppContainer(props) {
       .then((jsondata) => {
         localStorage.setItem('AccessToken', jsondata.user.access_token);
         navigateTo();
+      })
+      .catch((err) => {
+        if (err) {
+          toast.warning('Something went wrong', {
+            className: 'error-toast',
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
       });
   };
 
@@ -44,6 +54,7 @@ export default function AppContainer(props) {
       <div className="parent-div">
         <div className="branch-div">
           <h2>DeployDash</h2>
+          <ToastContainer />
         </div>
       </div>
       <Spinner animation="border" variant="secondary" />

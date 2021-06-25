@@ -5,6 +5,8 @@ import { React, useEffect, useState } from 'react';
 import '../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Repositories() {
   const [repos, setRepos] = useState(null);
@@ -25,6 +27,13 @@ export default function Repositories() {
     ).then((response) => response.json())
       .then((jsondata) => {
         setRepos(jsondata.repositories);
+      }).catch((err) => {
+        if (err) {
+          toast.warning('Something went wrong!!', {
+            className: 'error-toast',
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
       });
   };
 
@@ -116,6 +125,7 @@ export default function Repositories() {
                 </tbody>
               </table>
             </div>
+            <ToastContainer />
           </div>
         ) : <Spinner animation="border" variant="secondary" />}
       </div>

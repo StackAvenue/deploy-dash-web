@@ -1,5 +1,7 @@
 import React from 'react';
 import '../assets/scss/loginPage.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LoginPage() {
   const newTab = (url) => {
@@ -17,8 +19,12 @@ export default function LoginPage() {
         newTab(response.url);
       })
       .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        if (err) {
+          toast.warning('Something went wrong', {
+            className: 'error-toast',
+            position: toast.POSITION.TOP_CENTER,
+          });
+        }
       });
   };
 
@@ -49,6 +55,7 @@ export default function LoginPage() {
                 {' '}
                 BitBucket
               </button>
+              <ToastContainer autoClose={13000} />
             </div>
           </div>
         </div>

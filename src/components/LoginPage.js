@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable indent */
 import React from 'react';
 import '../assets/scss/loginPage.scss';
 
@@ -15,13 +13,8 @@ export default function LoginPage() {
         method: 'GET',
       },
     ).then((response) => {
-        console.log(response);
-        newTab(response.url);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
+      newTab(response.url);
+    });
   };
 
   return (

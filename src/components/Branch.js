@@ -1,9 +1,3 @@
-/* eslint-disable no-lone-blocks */
-/* eslint-disable no-console */
-/* eslint-disable camelcase */
-/* eslint-disable react/jsx-key */
-/* eslint-disable jsx-quotes */
-/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -19,15 +13,12 @@ function Branch() {
         headers: myHeaders,
       }).then((response) => response.json())
       .then((jsondata) => {
-        console.log(jsondata);
         setBranch(jsondata.branches);
       });
   };
   useEffect(() => {
     getBranch();
   });
-
-  const arr = ['branch 1', 'branch 2', 'branch 3', 'branch 4'];
 
   return (
     <div className="homepage">
@@ -42,7 +33,7 @@ function Branch() {
         <div className="repo-div">
           <div className="search-bar">
             <input placeholder="Enter branch name" />
-            <button type='submit'>Deploy</button>
+            <button type="submit">Deploy</button>
           </div>
           <div className="branch">
             <table>
@@ -51,7 +42,7 @@ function Branch() {
                   <th>Branch</th>
                 </tr>
                 {branch.map((items) => (
-                  <tr>
+                  <tr key={items.name}>
                     <th>{items.name}</th>
                   </tr>
                 ))}

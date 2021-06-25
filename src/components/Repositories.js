@@ -1,35 +1,15 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-param-reassign */
 import { React, useEffect, useState } from 'react';
 import '../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Branch from './Branch';
 
 export default function Repositories() {
   const [repos, setRepos] = useState([]);
-  // eslint-disable-next-line no-console
-  console.log('repo', repos);
   const [userName, setUserName] = useState('Loading');
   const [userData, setUserData] = useState(null);
   const [showAllRepos, setShowAllRepos] = useState(true);
   const [searchedRepos, setSearchedRepos] = useState(null);
-  // const [newrepo, setNewRepo] = useState([]);
-
-  // const getRepo = () => {
-  //   fetch('http://localhost:3001/api/v1/users/repositories',
-  //     {
-  //       headers:
-  //     { access_token: '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' },
-  //     }).then((resp) => {
-  //     resp.json();
-  //     console.log('neha', resp);
-  //   }).then((resp) => {
-  //     setNewRepo(resp);
-  //   }).catch((err) => (err));
-  // };
 
   const getRepos = () => {
     const myHeaders = new Headers();
@@ -65,7 +45,6 @@ export default function Repositories() {
   useEffect(() => {
     getRepos();
     getUserDetails();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signOut = () => {

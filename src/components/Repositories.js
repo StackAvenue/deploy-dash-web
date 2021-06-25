@@ -29,7 +29,7 @@ export default function Repositories() {
         setRepos(jsondata.repositories);
       }).catch((err) => {
         if (err) {
-          toast.warning('Something went wrong!!', {
+          toast.error('Something went wrong!!', {
             className: 'error-toast',
             position: toast.POSITION.TOP_CENTER,
           });
@@ -50,6 +50,17 @@ export default function Repositories() {
       .then((jsondata) => {
         setUserName(jsondata.user.login);
         setUserData(jsondata.user);
+        toast.success('Successfully Logged In', {
+          className: 'error-toast',
+          position: toast.POSITION.TOP_RIGHT,
+        });
+      }).catch((err) => {
+        if (err) {
+          toast.error('Something went wrong', {
+            className: 'error-toast',
+            position: toast.POSITION.TOP_RIGHT,
+          });
+        }
       });
   };
 

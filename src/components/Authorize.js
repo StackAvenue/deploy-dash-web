@@ -36,9 +36,9 @@ export default function AppContainer(props) {
       })
       .catch((err) => {
         if (err) {
-          toast.warning('Something went wrong', {
+          toast.error('Something went wrong', {
             className: 'error-toast',
-            position: toast.POSITION.TOP_CENTER,
+            position: toast.POSITION.TOP_RIGHT,
           });
         }
       });

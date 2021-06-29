@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-param-reassign */
 import { React, useEffect, useState } from 'react';
 import '../../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import API from '../../services/API';
 
 export default function Repositories() {
   const [repos, setRepos] = useState(null);
@@ -17,40 +15,21 @@ export default function Repositories() {
   const navigateTo = () => history.push('/');
 
   const getRepos = () => {
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
-    fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/users/repositories`,
-      {
-        method: 'GET',
-        headers: myHeaders,
-      },
-    ).then((response) => response.json())
-      .then((jsondata) => {
-        setRepos(jsondata.repositories);
-      });
+    API.getRepos().then((res) => {
+      setRepos(res.repositories);
+    });
   };
 
   const getUserDetails = () => {
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
-    fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/users`,
-      {
-        method: 'GET',
-        headers: myHeaders,
-      },
-    ).then((response) => response.json())
-      .then((jsondata) => {
-        setUserName(jsondata.user.login);
-        setUserData(jsondata.user);
-      });
+    API.getUserDetails().then((res) => {
+      setUserName(res.user.login);
+      setUserData(res.user);
+    });
   };
 
   useEffect(() => {
     getRepos();
     getUserDetails();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const signOut = () => {

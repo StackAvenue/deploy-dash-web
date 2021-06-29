@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginPage from './Auth/LoginPage';
 import Repositories from './Home/Repositories';
-import Authorize from './Authorize';
+import Authorize from './Auth/Authorize';
 import { ProtectedRoute } from '../utils/ProtectedRoute';
 
 export default function AppContainer() {

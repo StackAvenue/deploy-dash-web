@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import '../../assets/scss/loginPage.scss';
 import { useHistory } from 'react-router-dom';
+import API from '../../services/API';
 
 export default function LoginPage() {
   const history = useHistory();
@@ -11,19 +12,9 @@ export default function LoginPage() {
   };
 
   const handleClick = async () => {
-    fetch(
-      `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`,
-      {
-        method: 'GET',
-      },
-    )
-      .then((response) => {
-        newTab(response.url);
-      })
-      .catch((err) => {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      });
+    API.handleUserLogin().then((res) => {
+      newTab(res.config.url);
+    });
   };
 
   useEffect(() => {

@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable no-param-reassign */
 import { React, useEffect, useState } from 'react';
-import '../assets/scss/branchesPage.scss';
+import '../../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';

@@ -1,7 +1,11 @@
-import React from 'react';
-import '../assets/scss/loginPage.scss';
+import React, { useEffect } from 'react';
+import '../../assets/scss/loginPage.scss';
+import { useHistory } from 'react-router-dom';
 
 export default function LoginPage() {
+  const history = useHistory();
+  const navigateTo = () => history.push('/repositories');
+
   const newTab = (url) => {
     window.open(url, '_parent');
   };
@@ -21,6 +25,13 @@ export default function LoginPage() {
         console.log(err);
       });
   };
+
+  useEffect(() => {
+    if (window.localStorage.getItem('AccessToken')) {
+      navigateTo();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="login-page">

@@ -2,11 +2,12 @@ import { React, useEffect, useState } from 'react';
 import '../../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
 import API from '../../services/API';
 
 export default function Repositories() {
-  const [repos, setRepos] = useState(null);
+  const [repos, setRepos] = useState([]);
   const [userName, setUserName] = useState('Loading');
   const [userData, setUserData] = useState(null);
   const [showAllRepos, setShowAllRepos] = useState(true);
@@ -91,7 +92,7 @@ export default function Repositories() {
                 <tbody>
                   {repos && showAllRepos && repos.map((repo) => (
                     <tr key={repo.name}>
-                      <td>{repo.name}</td>
+                      <Link to={`/repositories/${repo.full_name}/branch`}><td>{repo.name}</td></Link>
                     </tr>
                   ))}
                   {searchedRepos && !showAllRepos && searchedRepos.map((repo) => (

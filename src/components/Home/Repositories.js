@@ -1,8 +1,10 @@
 import { React, useEffect, useState } from 'react';
-import '../assets/scss/branchesPage.scss';
+import '../../assets/scss/branchesPage.scss';
 import Spinner from 'react-bootstrap/Spinner';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+
+import API from '../../services/API';
 
 export default function Repositories() {
   const [repos, setRepos] = useState([]);
@@ -10,36 +12,20 @@ export default function Repositories() {
   const [userData, setUserData] = useState(null);
   const [showAllRepos, setShowAllRepos] = useState(true);
   const [searchedRepos, setSearchedRepos] = useState(null);
+  const history = useHistory();
+  const navigateTo = () => history.push('/');
 
   const getRepos = () => {
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
-    fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/users/repositories`,
-      {
-        method: 'GET',
-        headers: myHeaders,
-      },
-    ).then((response) => response.json())
-      .then((jsondata) => {
-        setRepos(jsondata.repositories);
-      });
+    API.getRepos().then((res) => {
+      setRepos(res.repositories);
+    });
   };
 
   const getUserDetails = () => {
-    const myHeaders = new Headers();
-    myHeaders.append('Authorization', localStorage.getItem('AccessToken'));
-    fetch(
-      `${process.env.REACT_APP_API_ENDPOINT}/users`,
-      {
-        method: 'GET',
-        headers: myHeaders,
-      },
-    ).then((response) => response.json())
-      .then((jsondata) => {
-        setUserName(jsondata.user.login);
-        setUserData(jsondata.user);
-      });
+    API.getUserDetails().then((res) => {
+      setUserName(res.user.login);
+      setUserData(res.user);
+    });
   };
 
   useEffect(() => {
@@ -49,8 +35,7 @@ export default function Repositories() {
 
   const signOut = () => {
     window.localStorage.removeItem('AccessToken');
-    localStorage.removeItem('UserAssets');
-    window.close();
+    navigateTo();
   };
 
   const handleChange = (e) => {
@@ -65,6 +50,11 @@ export default function Repositories() {
     } else {
       setShowAllRepos(true);
     }
+  };
+
+  const resyncPage = () => {
+    // eslint-disable-next-line no-restricted-globals
+    window.location.reload();
   };
 
   return (
@@ -82,7 +72,7 @@ export default function Repositories() {
               title=""
               id="dropdown-menu-align-right"
             >
-              <Dropdown.Item eventKey="1">Re-sync</Dropdown.Item>
+              <Dropdown.Item eventKey="1" onClick={(e) => resyncPage(e)}>Re-sync</Dropdown.Item>
               <Dropdown.Item eventKey="4" onClick={(e) => signOut(e)}>Sign out</Dropdown.Item>
             </DropdownButton>
           </div>

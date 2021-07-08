@@ -5,7 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/font-awesome/css/font-awesome.min.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import axiosInitializer from './services/axios_initializer';
 
+axiosInitializer.config();
 ReactDOM.render(
   <React.StrictMode>
     <App />

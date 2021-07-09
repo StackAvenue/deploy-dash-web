@@ -1,8 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import Repositories from './Repositories';
-import Authorize from './Authorize';
+import LoginPage from './Auth/LoginPage';
+import Repositories from './Home/Repositories';
+import Authorize from './Auth/Authorize';
+import { ProtectedRoute } from '../utils/ProtectedRoute';
 
 export default function AppContainer() {
   return (
@@ -12,12 +13,11 @@ export default function AppContainer() {
           <Route path="/authorize">
             <Authorize />
           </Route>
-          <Route path="/repositories">
-            <Repositories />
-          </Route>
-          <Route path="/">
+          <ProtectedRoute path="/repositories" component={Repositories} />
+          <Route exact path="/">
             <LoginPage />
           </Route>
+          <Route path="*" component={() => '404 Not Found'} />
         </Switch>
       </div>
     </Router>

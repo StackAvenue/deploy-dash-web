@@ -1,3 +1,6 @@
+body {
+  background-color: aliceblue !important;
+}
 .homepage {
   /* background: #e6e6e8; */
   background: aliceblue;
@@ -120,6 +123,8 @@ li:first-child {
 
 .branch {
   padding: 10px;
+  height: calc(100vh - 221px);
+  overflow: auto;
 }
 
 table {
@@ -227,4 +232,8 @@ td:hover {
 
 .dropdown-menu {
   margin-top: 5px !important;
+}
+
+.branch-div1 {
+  background-color: aliceblue;
 }

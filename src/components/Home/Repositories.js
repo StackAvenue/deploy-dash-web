@@ -4,7 +4,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Link } from 'react-router-dom';
-
+import HeaderComp from '../HeaderComp';
+import '../../assets/scss/repositoryPage.scss';
 import API from '../../services/API';
 
 export default function Repositories() {
@@ -37,7 +38,8 @@ export default function Repositories() {
   };
 
   return (
-    <div>
+    <div className="repository-div">
+      <HeaderComp />
       <div>
         {repos !== null ? (
           <div className="repo-div">

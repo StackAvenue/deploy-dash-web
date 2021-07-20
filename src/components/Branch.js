@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import HeaderComp from './HeaderComp';
+import '../assets/scss/branchesPage.scss';
 
 function Branch() {
   const [branch, setBranch] = useState([]);
@@ -42,30 +44,40 @@ function Branch() {
   }, []);
 
   return (
-    <div className="repo-div">
-      <div className="search-bar">
-        <input placeholder="Enter branch name" onChange={(e) => handleChange(e)} />
-        <button type="submit">Deploy</button>
-      </div>
-      <div className="branch">
-        <table>
-          <thead>
-            <tr>
-              <th>Branch</th>
-            </tr>
-            { branch && showAllBranches && branch.map((items) => (
-              <tr key={items.name}>
-                <th>{items.name}</th>
+    <div className="branch-div1">
+      <HeaderComp />
+      <div className="repo-div">
+        <div className="search-bar">
+          <input
+            placeholder="Enter branch name"
+            onChange={(e) => handleChange(e)}
+          />
+          <button type="submit">Deploy</button>
+        </div>
+        <div className="branch">
+          <table>
+            <thead>
+              <tr>
+                <th>Branch</th>
               </tr>
-            ))}
-            {searchedBranches && !showAllBranches && searchedBranches.map((branchItem) => (
-              <tr key={branchItem.name}>
-                <td>{branchItem.name}</td>
-              </tr>
-            ))}
-          </thead>
-          <tbody />
-        </table>
+              {branch
+              && showAllBranches
+              && branch.map((items) => (
+                <tr key={items.name}>
+                  <th>{items.name}</th>
+                </tr>
+              ))}
+              {searchedBranches
+              && !showAllBranches
+              && searchedBranches.map((branchItem) => (
+                <tr key={branchItem.name}>
+                  <td>{branchItem.name}</td>
+                </tr>
+              ))}
+            </thead>
+            <tbody />
+          </table>
+        </div>
       </div>
     </div>
   );

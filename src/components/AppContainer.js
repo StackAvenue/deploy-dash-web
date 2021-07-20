@@ -5,13 +5,11 @@ import Repositories from './Home/Repositories';
 import Authorize from './Auth/Authorize';
 import Branch from './Branch';
 import { ProtectedRoute } from '../utils/ProtectedRoute';
-import Header from './Header';
 
 export default function AppContainer() {
   return (
     <Router>
       <div>
-        <Header />
         <Switch>
           <Route path="/authorize">
             <Authorize />

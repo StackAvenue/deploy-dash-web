@@ -14,9 +14,9 @@ export default function AppContainer() {
           <Route path="/authorize">
             <Authorize />
           </Route>
-          <Route path="/repositories/:userName/:repoName/branch" exact>
+          <ProtectedRoute path="/repositories/:userName/:repoName/branch" exact>
             <Branch />
-          </Route>
+          </ProtectedRoute>
           <ProtectedRoute path="/repositories" component={Repositories} />
           <Route exact path="/">
             <LoginPage />

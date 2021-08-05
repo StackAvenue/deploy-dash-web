@@ -1,5 +1,7 @@
 import axios from 'axios';
+// import { useParams } from 'react-router-dom';
 import { SERVICE_URL, CLIENT_ID } from '../utils/Constants';
+import 'react-toastify/dist/ReactToastify.css';
 
 const URL = SERVICE_URL;
 
@@ -39,6 +41,17 @@ const API = {
       });
     return res.data;
   },
+
+  async getBranch(RepoName) {
+    const res = await axios
+      .get(`${URL}/users/branches?full_name=${RepoName.userName}/${RepoName.repoName}`, {
+        headers: {
+          Authorization: window.localStorage.getItem('AccessToken'),
+        },
+      });
+    return res.data;
+  },
+
 };
 
 export default API;

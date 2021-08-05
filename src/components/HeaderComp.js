@@ -1,16 +1,22 @@
 import { React, useEffect, useState } from 'react';
 import { Dropdown, DropdownButton } from 'react-bootstrap';
 import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import API from '../services/API';
 
 export default function Header() {
   const [userName, setUserName] = useState('Loading');
   const [userData, setUserData] = useState(null);
+  const history = useHistory();
+  const navigateTo = () => history.push('/');
 
   const getUserDetails = () => {
     API.getUserDetails().then((res) => {
       setUserName(res.user.login);
       setUserData(res.user);
+    }).catch(() => {
+      toast.error('Something went wrong');
     });
   };
 
@@ -20,6 +26,7 @@ export default function Header() {
 
   const signOut = () => {
     window.localStorage.removeItem('AccessToken');
+    navigateTo();
   };
 
   const resyncPage = () => {
@@ -48,6 +55,7 @@ export default function Header() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

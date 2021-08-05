@@ -22,17 +22,19 @@ export default function LoginPage() {
     )
       .then((response) => {
         newTab(response.url);
+        toast.success('Successfully loggedIn', {
+        });
       })
       .catch((err) => {
         if (err) {
           toast.error('Something went wrong', {
-            className: 'error-toast',
-            position: toast.POSITION.TOP_RIGHT,
           });
         }
       });
     API.handleUserLogin().then((res) => {
       newTab(res.config.url);
+    }).catch(() => {
+      toast.error('Something went wrong');
     });
   };
 
@@ -70,7 +72,17 @@ export default function LoginPage() {
                 {' '}
                 BitBucket
               </button>
-              <ToastContainer autoClose={13000} />
+              <ToastContainer
+                autoClose={13000}
+                position="top-right"
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
             </div>
           </div>
         </div>

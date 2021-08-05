@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import Spinner from 'react-bootstrap/Spinner';
+import { ToastContainer, toast } from 'react-toastify';
 import API from '../../services/API';
 
 export default function AppContainer() {
@@ -17,6 +18,8 @@ export default function AppContainer() {
     API.getInfo(code).then((res) => {
       localStorage.setItem('AccessToken', res.user.access_token);
       navigateTo();
+    }).catch(() => {
+      toast.error('Something went wrong');
     });
   };
 
@@ -33,6 +36,7 @@ export default function AppContainer() {
         </div>
       </div>
       <Spinner animation="border" variant="secondary" />
+      <ToastContainer />
     </div>
   );
 }

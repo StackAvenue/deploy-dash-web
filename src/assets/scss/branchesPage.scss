@@ -2,12 +2,8 @@ body {
   background-color: aliceblue !important;
 }
 .homepage {
-  /* background: #e6e6e8; */
   background: aliceblue;
-  /* background: #f5f5f7; */
   height: auto;
-  /* margin-left: 30px;
-  margin-right: 30px; */
   width: auto;
   display: flex;
 }
@@ -25,7 +21,6 @@ body {
 }
 
 .branch-div h2 {
-  /* margin-left: 22px; */
   margin-left: 53px;
   margin-bottom: 0;
   font-size: 24px;
@@ -65,8 +60,6 @@ li:first-child {
   width: 40px;
   background: white;
   border-radius: 50%;
-  /* margin-right: 22px; */
-  /* margin-right: 53px; */
   margin-right: 8px;
 }
 
@@ -119,6 +112,8 @@ li:first-child {
   padding: 10px;
   margin-left: 20px;
   cursor: pointer;
+  padding-bottom: 1px;
+  padding-top: 1px;
 }
 
 .branch {
@@ -137,13 +132,12 @@ td {
   border-collapse: collapse;
 }
 
-tbody tr:first-child td {
-  border-top: 1px solid gainsboro;
-}
-
 th {
   padding: 5px;
   text-align: inherit;
+}
+tr {
+  border-bottom: 1px solid gainsboro;
 }
 
 tr:nth-of-type(even) {
@@ -151,7 +145,6 @@ tr:nth-of-type(even) {
 }
 
 td {
-  border-bottom: 1px solid gainsboro;
   padding: 5px;
   height: 40px;
 }

@@ -151,13 +151,12 @@ td {
   a {
     color: black;
   }
-}
-
-a:hover {
-  cursor: pointer;
-  text-decoration: underline;
-  color: #256edb;
-  width: fit-content;
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #256edb;
+    width: fit-content;
+  }
 }
 
 .user {
@@ -228,7 +227,7 @@ a:hover {
 }
 
 .dropdown-menu {
-  margin-top: 5px !important;
+  top: 5px !important;
 }
 
 .branch-div1 {

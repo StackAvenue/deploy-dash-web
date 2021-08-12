@@ -1,16 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import '../assets/scss/loginPage.scss';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../../assets/scss/loginPage.scss';
-import { useHistory } from 'react-router-dom';
-import API from '../../services/API';
 
 export default function LoginPage() {
-  const history = useHistory();
-  const navigateTo = () => history.push('/repositories');
-
   const newTab = (url) => {
-    window.open(url, '_parent');
+    window.open(url, '_blank');
   };
 
   const handleClick = async () => {
@@ -22,28 +17,16 @@ export default function LoginPage() {
     )
       .then((response) => {
         newTab(response.url);
-        toast.success('Successfully loggedIn', {
-        });
       })
       .catch((err) => {
         if (err) {
           toast.error('Something went wrong', {
+            className: 'error-toast',
+            position: toast.POSITION.TOP_RIGHT,
           });
         }
       });
-    API.handleUserLogin().then((res) => {
-      newTab(res.config.url);
-    }).catch(() => {
-      toast.error('Something went wrong');
-    });
   };
-
-  useEffect(() => {
-    if (window.localStorage.getItem('AccessToken')) {
-      navigateTo();
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div className="login-page">
@@ -72,17 +55,7 @@ export default function LoginPage() {
                 {' '}
                 BitBucket
               </button>
-              <ToastContainer
-                autoClose={13000}
-                position="top-right"
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-              />
+              <ToastContainer autoClose={13000} />
             </div>
           </div>
         </div>

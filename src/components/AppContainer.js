@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import LoginPage from './Auth/LoginPage';
 import Repositories from './Home/Repositories';
 import Authorize from './Auth/Authorize';
+import Branch from './Branch';
 import { ProtectedRoute } from '../utils/ProtectedRoute';
 
 export default function AppContainer() {
@@ -13,6 +14,9 @@ export default function AppContainer() {
           <Route path="/authorize">
             <Authorize />
           </Route>
+          <ProtectedRoute path="/repositories/:userName/:repoName/branch" exact>
+            <Branch />
+          </ProtectedRoute>
           <ProtectedRoute path="/repositories" component={Repositories} />
           <Route exact path="/">
             <LoginPage />

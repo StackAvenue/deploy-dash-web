@@ -14,23 +14,6 @@ export default function LoginPage() {
   };
 
   const handleClick = async () => {
-    fetch(
-      `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}`,
-      {
-        method: 'GET',
-      },
-    )
-      .then((response) => {
-        newTab(response.url);
-        toast.success('Successfully loggedIn', {
-        });
-      })
-      .catch((err) => {
-        if (err) {
-          toast.error('Something went wrong', {
-          });
-        }
-      });
     API.handleUserLogin().then((res) => {
       newTab(res.config.url);
     }).catch(() => {

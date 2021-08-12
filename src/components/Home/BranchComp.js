@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import Spinner from 'react-bootstrap/Spinner';
 import API from '../../services/API';
 
 function BranchComp() {
@@ -8,6 +9,7 @@ function BranchComp() {
   const RepoName = useParams();
   const [showAllBranches, setShowAllBranches] = useState(true);
   const [searchedBranches, setSearchedBranches] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getBranch = () => {
     API.getBranch(RepoName)
@@ -15,6 +17,8 @@ function BranchComp() {
         setBranch(jsondata.branches);
       }).catch(() => {
         toast.error('Something went wrong');
+      }).finally(() => {
+        setIsLoading(false);
       });
   };
   const handleChange = (e) => {
@@ -38,37 +42,43 @@ function BranchComp() {
 
   return (
     <>
-      <div className="search-bar">
-        <input
-          placeholder="Enter branch name"
-          onChange={(e) => handleChange(e)}
-        />
-        <button type="submit">Deploy</button>
-      </div>
-      <div className="branch">
-        <table>
-          <thead>
-            <tr>
-              <th>Branch</th>
-            </tr>
-            {branch
+      {isLoading ? <Spinner animation="border" variant="secondary" />
+        : (
+          <>
+            <div className="search-bar">
+              <input
+                placeholder="Enter branch name"
+                onChange={(e) => handleChange(e)}
+              />
+            </div>
+            <div className="branch">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Branch</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {branch
               && showAllBranches
               && branch.map((items) => (
                 <tr key={items.name}>
-                  <th>{items.name}</th>
+                  <td>{items.name}</td>
                 </tr>
               ))}
-            {searchedBranches
+                  {searchedBranches
               && !showAllBranches
               && searchedBranches.map((branchItem) => (
                 <tr key={branchItem.name}>
                   <td>{branchItem.name}</td>
                 </tr>
               ))}
-          </thead>
-        </table>
-        <ToastContainer />
-      </div>
+                </tbody>
+              </table>
+              <ToastContainer />
+            </div>
+          </>
+        )}
     </>
   );
 }
